@@ -1,5 +1,4 @@
 # Data Processing
-==========================
 
 Biblioteca de códigos úteis(ou não) que foram usados para poderem processar dados de textos e imagens.
 
