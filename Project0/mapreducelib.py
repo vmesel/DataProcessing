@@ -10,8 +10,10 @@ License:    GPLv3
 Support:    Python (2.7+ ~ 3.5+)
 """
 
-from os import system
+#from os import system
+import subprocess as sub
 
+system = sub.call
 
 class Hdfs:
 
