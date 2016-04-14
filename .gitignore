@@ -28,3 +28,13 @@ settings.py
 *.pyc
 
 *.py~
+
+*.ipynb
+
+TwitterProcessing/twitter-return.txt
+
+Project0/mpprog.py
+
+Project0/redprog.py
+
+Project0/reducer.py
