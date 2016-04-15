@@ -14,6 +14,13 @@ import settings
 import json
 import time
 from os import system,path
+import sys
+import sqlite3 as sql
+
+
+connection = sql.connect("database.db")
+cursor = connection.cursor()
+
 
 print("Iniciando parseamento de Tweets!")
 
@@ -24,8 +31,14 @@ class Scrapper:
 
             if path.exists("processed/") == False:
                 system("mkdir processed/")
-            systemstring = "touch processed/" + ofile + ".txt"
-            system(systemstring)
+
+            if path.exists("processed/" + ofile + ".txt") == False:
+                systemstring = "touch processed/" + ofile + ".txt"
+                system(systemstring)
+
+            #f = open('processed/' + ofile + ".txt", 'r+')
+            #sys.stdout = f
+
 
             t = Twitter(auth=OAuth(settings.token, settings.tokensecret, settings.consumerkey, settings.consumersecret))
             s = t.search.tweets(q=str(search),count=150)
@@ -45,20 +58,6 @@ class Scrapper:
                         listing = open(TweetsListed,"r+")
                         if str(status['id']) not in listing.read():
 
-                            listing.write("{}\n".format(str(status['id'])))
-                            tweet.append(str(status['id']))
-                            tweet.append(status['created_at'])
-                            tweet.append(status['user']['screen_name'])
-                            try:
-                                tweet.append(status['source'])
-                            except:
-                                tweet.append("Source Failed")
-                            hashtags = []
-                            for hashtag in status['entities']['hashtags']:
-                                hashtags.append(hashtag['text'])
-                            tweet.append(hashtags)
-                            tweet.append(status['retweet_count'])
-                            tweet.append(status['favorite_count'])
                             palavras = []
 
 
@@ -67,26 +66,20 @@ class Scrapper:
                                     pass
                                 else:
                                     palavras.append(palavra)
-                            try:
-                                tweet.append(palavras)
-                            except:
-                                tweet.append("Parsing Failed")
 
-                            file = open("processed/"+ ofile + ".txt", "r+")
 
                             try:
-                                file.write(str(tweet) + ";\n\r\n\r\n\r")
-                            except:
-                                 file.write(str(tweet).decode('win1252') + ";\n\r\n\r\n\r")
+                                stringTweet = 'INSERT INTO TWEET(IDTWEET, DATA, USUARIO, HASHTAGS, RETWEETS, FAVORITOS, TWEET) VALUES "{}","{}","{}","{}","{}","{}","{}"''.format(str(status['id']),str(status['created_at']), str(status['user']['screen_name']), str(status['entities']),str(status['retweet_count']),str(status['favorite_count']), str(palavras))
+                                print(stringTweet)
+                                #cursor.execute(stringTweet)
+                            except ValueError:
+                                print(ValueError)
 
-                            tweet = []
+                            listing.write(str(status['id'])+ "\n")
 
-
-                            file.close()
-                        
                         else:
                             pass
 
-        except Exception:
-            print("Exception: " + str(Exception))
+        except ValueError:
+            print("Exception: " + str(ValueError))
             print("O programa voltará a rodar em alguns instantes")
