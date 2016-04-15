@@ -1,8 +1,8 @@
 """
     About twitterprocessor
 Description: Processador de Linguagem Natural baseado em Tweets!
-Version:    0.0.2 (April/2016)
-Last Mod:   14-04-16
+Version:    0.1.0 (April/2016)
+Last Mod:   15-04-16
 Author:     Vinicius Mesel (vmesel)
 Oficial:    Github.com/vmesel/DataProcessing/
 License:    MIT
