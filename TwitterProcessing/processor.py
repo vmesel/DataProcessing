@@ -16,10 +16,8 @@ import time
 from os import system,path
 import sys
 import sqlite3 as sql
+import re
 
-
-connection = sql.connect("database.db")
-cursor = connection.cursor()
 
 
 print("Iniciando parseamento de Tweets!")
@@ -29,15 +27,14 @@ class Scrapper:
     def Scrapping(search,ofile):
         try:
 
-            if path.exists("processed/") == False:
-                system("mkdir processed/")
 
-            if path.exists("processed/" + ofile + ".txt") == False:
-                systemstring = "touch processed/" + ofile + ".txt"
-                system(systemstring)
+            # Linux only
+            #if path.exists("processed/") == False:
+            #    system("mkdir processed/")
 
-            #f = open('processed/' + ofile + ".txt", 'r+')
-            #sys.stdout = f
+            #if path.exists("processed/" + ofile + ".txt") == False:
+                #systemstring = "touch processed/" + ofile + ".txt"
+                #system(systemstring)
 
 
             t = Twitter(auth=OAuth(settings.token, settings.tokensecret, settings.consumerkey, settings.consumersecret))
@@ -53,29 +50,35 @@ class Scrapper:
                 else:
                     if "pt" in status['lang']:
                         TweetsListed = "processed/" + ofile + "-crawled.txt"
-                        systemstringcrawled = "touch " + TweetsListed
-                        system(systemstringcrawled)
+                        #systemstringcrawled = "touch " + TweetsListed
+                        #system(systemstringcrawled)
                         listing = open(TweetsListed,"r+")
                         if str(status['id']) not in listing.read():
 
                             palavras = []
 
+                            #for palavra in status['text'].split(" "):
+                            #    if "#" in palavra:
+                            #        pass
+                            #    else:
+                            #        palavras = palavras + (palavra)
 
-                            for palavra in status['text'].split(" "):
-                                if "#" in palavra:
-                                    pass
-                                else:
-                                    palavras.append(palavra)
-
+                            #palavras = palavras.split("'")
+                            statusone = status['text'].split('"')
+                            statustwo = re.sub('[\"\']', '', status['text'])
 
                             try:
-                                stringTweet = 'INSERT INTO TWEET(IDTWEET, DATA, USUARIO, HASHTAGS, RETWEETS, FAVORITOS, TWEET) VALUES "{}","{}","{}","{}","{}","{}","{}"''.format(str(status['id']),str(status['created_at']), str(status['user']['screen_name']), str(status['entities']),str(status['retweet_count']),str(status['favorite_count']), str(palavras))
+                                connection = sql.connect("database.db")
+                                cursor = connection.cursor()
+                                stringTweet = 'INSERT INTO "TWEET"("IDTWEET", "DATA", "USUARIO", "HASHTAGS", "RETWEETS", "FAVORITOS", "TWEET") VALUES("{}","{}","{}","{}","{}","{}","{}");'.format(str(status['id']),str(status['created_at']), str(status['user']['screen_name']), str(status['entities']),str(status['retweet_count']),str(status['favorite_count']),str(statustwo))
                                 print(stringTweet)
-                                #cursor.execute(stringTweet)
+                                cursor.execute(str(stringTweet))
+                                connection.commit()
                             except ValueError:
-                                print(ValueError)
+                                pass
 
                             listing.write(str(status['id'])+ "\n")
+
 
                         else:
                             pass
