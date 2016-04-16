@@ -42,3 +42,5 @@ TwitterProcessing/crawled-twitter.txt
 TwitterProcessing/apuracao.txt
 
 TwitterProcessing/processed/*.txt
+*.exe
+TwitterProcessing/database.db
