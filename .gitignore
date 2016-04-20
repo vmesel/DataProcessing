@@ -44,3 +44,11 @@ TwitterProcessing/apuracao.txt
 TwitterProcessing/processed/*.txt
 *.exe
 TwitterProcessing/database.db
+
+*.db
+
+TwitterProcessing/*.db
+
+TwitterProcessing/datanew.txt
+
+TwitterProcessing/dumps/*.txt
