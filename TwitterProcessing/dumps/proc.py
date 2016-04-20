@@ -1,16 +1,18 @@
 from sqlite3 import connect
 import codecs
 
-connection = connect("database.db")
+connection = connect("dbs/database.db")
 
-#f = open("database-zero.txt","w")
+#f = open("processed/database.txt","w")
 
 cursor = connection.cursor()
 
 cursor.execute("SELECT TWEET FROM TWEET")
-connection.commit()
 
 for tweet in cursor.fetchall():
-	print(tweet[0].encode())
+	print(str(tweet[0]).decode('utf-8','ignore'))
+	#f.write(tweet[0] + "\n")
 
-print("ACABOUUUU!! EBAAA")
+#f.close()
+#print("ACABOUUUU!! EBAAA")
+connection.commit()
