@@ -66,7 +66,6 @@ class Scrapper:
                             #palavras = palavras.split("'")
                             statusone = status['text'].split('"')
                             statustwo = re.sub('[\"\']', '', status['text'])
-                            statustwo = str(statustwo).encode('utf-8', "ignore")
 
                             try:
                                 connection = sql.connect("database.db")
