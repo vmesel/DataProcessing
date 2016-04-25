@@ -73,7 +73,8 @@ print(extrair_features(['Ela','linda'], word_features))
 
 # Baseado em: http://www.laurentluce.com/posts/twitter-sentiment-analysis-using-python-and-nltk/#highlighter_890313
 
-classificador = nltk.NaiveBayesClassifier.train()
+set_treinamento = nltk.classify.apply_features(extrair_features, amostras)
+classificador = nltk.NaiveBayesClassifier.train(set_treinamento)
 
 # Se Positivo > Negativo = Palavra Positiva
 # Se Negativo > Positivo = Palavra Negativa
