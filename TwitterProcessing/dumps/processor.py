@@ -58,18 +58,16 @@ def pegar_palavra_features(listaPalavras):
     return(featuresPalavra)
 
 
-def extrair_features(documento, featuresPalavras):
+def extrair_features(documento):
     palavras_documento = set(documento)
     features = {}
-    for palavra in featuresPalavras:
+    for palavra in word_features:
         features['contains(%s)' % palavra] = (palavra in palavras_documento)
     return(features)
 
 
 #print(pegar_palavra_em_amostra(amostras))
 word_features = pegar_palavra_features(pegar_palavra_em_amostra(amostras))
-
-print(extrair_features(['Ela','linda'], word_features))
 
 # Baseado em: http://www.laurentluce.com/posts/twitter-sentiment-analysis-using-python-and-nltk/#highlighter_890313
 
@@ -78,3 +76,13 @@ classificador = nltk.NaiveBayesClassifier.train(set_treinamento)
 
 # Se Positivo > Negativo = Palavra Positiva
 # Se Negativo > Positivo = Palavra Negativa
+
+
+
+def treinar(labeled_featuresets, estimator=ELEProbDist):
+    label_probdist = estimator(label_freqdist)
+    feature_probdist = {}
+    #print(feature_probdist)
+    return NaiveBayesClassifier(label_probdist, feature_probdist)
+
+print(label_probdist.prob('positive'))
