@@ -79,8 +79,8 @@ classificador = nltk.NaiveBayesClassifier.train(set_treinamento)
 
 
 
-def treinar(labeled_featuresets, estimator=ELEProbDist):
-    label_probdist = estimator(label_freqdist)
+def treinar(labeled_featuresets):
+    label_probdist = nltk.ELEProbDist(label_freqdist)
     feature_probdist = {}
     #print(feature_probdist)
     return NaiveBayesClassifier(label_probdist, feature_probdist)
