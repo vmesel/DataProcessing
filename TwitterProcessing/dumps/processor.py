@@ -28,6 +28,8 @@ class ProcessadorDeSentimentos():
         if type(amostra) is str:
             amostra = amostra.split()
         return self.classificador.classify(self.extrair_features(amostra))
+        #return self.extrair_features(amostra)
+        #return mostra_features
 
     def pegar_palavra_em_amostra(self, amostra):
         todas_palavras = []
@@ -57,6 +59,6 @@ class ProcessadorDeSentimentos():
             lista_palavras = nltk.wordpunct_tokenize(frase)
             for palavra in lista_palavras:
                 if palavra not in stop_words:
-                    palavras_filtradas.append(palavra)
+                    palavras_filtradas.append(palavra.lower())
             amostras.append((palavras_filtradas, sentimento))
         return(amostras)
