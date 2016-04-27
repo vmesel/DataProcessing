@@ -19,7 +19,22 @@ Positivas = []
 valorNegativas = 0
 Negativas = []
 
-for linha in open("dbs/saida0-sl.txt"):
+print("""
+                       _ _             _____            _   _                      _        _ 
+     /\               | (_)           / ____|          | | (_)                    | |      | |
+    /  \   _ __   __ _| |_ ___  ___  | (___   ___ _ __ | |_ _ _ __ ___   ___ _ __ | |_ __ _| |
+   / /\ \ | '_ \ / _` | | / __|/ _ \  \___ \ / _ \ '_ \| __| | '_ ` _ \ / _ \ '_ \| __/ _` | |
+  / ____ \| | | | (_| | | \__ \  __/  ____) |  __/ | | | |_| | | | | | |  __/ | | | || (_| | |
+ /_/    \_\_| |_|\__,_|_|_|___/\___| |_____/ \___|_| |_|\__|_|_| |_| |_|\___|_| |_|\__\__,_|_|
+                                                                                              
+                                                                                              
+Script criado por: Vinicius Mesel, Renan Palmeira e Eduardo Mendes
+Disponível em: http://github.com/vmesel/
+""")
+
+print("Iniciando o script, Aguarde os resultados...\n")
+
+for linha in open("dbs/saida1-sl.txt"):
     if processor.classifica(linha) is "positiva":
         valorPositivas = valorPositivas + 1
         Positivas.append(linha)
@@ -28,4 +43,4 @@ for linha in open("dbs/saida0-sl.txt"):
         Negativas.append(linha)
 
 
-print("Neste arquivo existem {} tweets contra o governo e {} tweets pró-governo!".format(valorNegativas,valorPositivas))
+print("Análise Concluída:\n\nNeste arquivo existem {} tweets contra o governo e {} tweets pró-governo!\n\n\n".format(valorNegativas,valorPositivas))
