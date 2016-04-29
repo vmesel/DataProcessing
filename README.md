@@ -2,7 +2,7 @@
 
 Biblioteca de códigos úteis(ou não) que foram usados para poderem processar dados de textos e imagens.
 
-As tecnologias aqui usadas são Open-Source e que tem ajuda da comunidade para ser desenvolvida. Entre elas estão, **Python**, **Hadoop**, **Linux** e algumas outras.
+As tecnologias aqui usadas são Open-Source e que tem ajuda da comunidade para ser desenvolvida. Entre elas estão, **Python**, **Hadoop**, **NLTK**, **Linux** e algumas outras.
 
 ## Projeto #0: Processamento de Textos do Machado de Assis(Abril de 2016 - )
 
