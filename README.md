@@ -15,3 +15,8 @@ Este projeto visa a avaliação do governo atual(até o dia 15 de abril de 2016)
 E as estátisticas estão disponíveis na imagem abaixo:
 
 ![alt text](TwitterProcessing/imgs/dataset-1.png "Estatísticas do Database 0")
+
+## Gerador de Corpora
+
+Este gerador tem como intuíto gerar corporas baseados em scrapping de dados de sites de noticias, críticas de cinema e etc para poder servir de base para as análises sentimentais!
+
