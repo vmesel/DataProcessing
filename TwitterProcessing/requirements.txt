@@ -1,2 +1,7 @@
 python-twitter
 nltk
+sklearn
+numpy
+pandas
+scipy
+nltk
